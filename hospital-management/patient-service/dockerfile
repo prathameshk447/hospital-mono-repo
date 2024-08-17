@@ -1,5 +1,5 @@
 # Use a base image with Java 11
-FROM prathameshkulkarni47/open-jdk:11-jre-slim
+FROM prathameshkulkarni47/open-jdk
 
 # Add a volume pointing to /tmp
 VOLUME /tmp
