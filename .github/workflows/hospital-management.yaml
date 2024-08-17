@@ -59,6 +59,7 @@ jobs:
         run:
           docker build -t ${{ secrets.DOCKER_REGISTRY_USER }}/patient-service:latest -f dockerfile .
         working-directory: hospital-management/patient-service
+        
 
       - name: Push Docker Image for patient-service
         run: 
