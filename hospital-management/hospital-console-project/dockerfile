@@ -1,4 +1,4 @@
-FROM gayatri589/open-jdk
+FROM prathameshkulkarni47/open-jdk
 
 # Set the working directory inside the container
 WORKDIR /app
