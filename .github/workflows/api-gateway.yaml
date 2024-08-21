@@ -48,8 +48,8 @@ jobs:
           password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
 
       - name: Push Docker Image
-        run: |
-          docker push ${{ secrets.DOCKER_REGISTRY_USER }}/api-gateway-hospital:${{ github.ref_name }}
+        run: 
+          docker push ${{secrets.DOCKER_REGISTRY_USER}}/api-gateway:latest
 
       - name: License finder
         run: |
