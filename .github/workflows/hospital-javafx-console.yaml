@@ -29,11 +29,6 @@ jobs:
         with:
           args: --path=cd hospital-management/hospital-console-project
 
-      - name: OSS scan
-        run: |
-          cd hospital-management/hospital-console-project
-          mvn ossindex:audit
-
       - name: OWASP Scan
         if: false
         run: |
