@@ -20,7 +20,7 @@ public class RestUtil {
             .uri(URI.create(url))
             .header("Content-Type", "application/json")
             .GET()
-            .build();
+            .build(); // object
 
     HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
@@ -30,7 +30,7 @@ public class RestUtil {
   }
 
   public static <T> T sendPostRequest(String url, Class<T> responseType, Object userPostRequest)
-      throws IOException, InterruptedException {
+      throws IOException, InterruptedException { // Reusable
 
     String jsonRequestAsString = objectMapper.writeValueAsString(userPostRequest);
 
@@ -41,6 +41,27 @@ public class RestUtil {
             .uri(URI.create(url))
             .header("Content-Type", "application/json")
             .POST(HttpRequest.BodyPublishers.ofString(jsonRequestAsString))
+            .build();
+
+    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+    T userResponse = objectMapper.readValue(response.body(), responseType);
+
+    //		System.out.println("Response is : " + response.body());
+
+    return userResponse;
+  }
+
+  public static <T> T sendPutRequest(String url, Class<T> responseType, Object requestObject)
+      throws IOException, InterruptedException {
+    String jsonRequestAsString = objectMapper.writeValueAsString(requestObject);
+
+    HttpClient client = HttpClient.newHttpClient();
+    HttpRequest request =
+        HttpRequest.newBuilder()
+            .uri(URI.create(url))
+            .header("Content-Type", "application/json")
+            .PUT(HttpRequest.BodyPublishers.ofString(jsonRequestAsString))
             .build();
 
     HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
