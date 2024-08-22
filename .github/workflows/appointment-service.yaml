@@ -21,7 +21,7 @@ jobs:
 
       - name: Perform google formatter check
         run: |
-          cd hospital-management/appointment-service
+          cd hospital-management/api-gateway
           mvn com.spotify.fmt:fmt-maven-plugin:check
 
       - name: Remove target directory
