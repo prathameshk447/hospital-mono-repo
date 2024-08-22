@@ -41,10 +41,10 @@ jobs:
           cd hospital-management/appointment-service
           mvn org.owasp:dependency-check-maven:check
 
-      - name: Build code and create docker image
-        run: |
-          cd hospital-management/appointment-service
-          mvn clean install docker:build -Dimage.registry=${{ secrets.DOCKER_REGISTRY_USER }} -Dimage.tag=${{ github.ref_name }}
+      - name: Build Docker Image
+        run: 
+          docker build -t ${{ secrets.DOCKER_REGISTRY_USER }}/appointment-service:latest -f dockerfile .
+        working-directory: hospital-management/appointment-service
 
       - name: Login to Docker Hub
         uses: docker/login-action@v2
@@ -53,8 +53,8 @@ jobs:
           password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
 
       - name: Push Docker Image
-        run: |
-          docker push ${{ secrets.DOCKER_REGISTRY_USER }}/appointment-service:${{ github.ref_name }}
+        run: 
+          docker push ${{secrets.DOCKER_REGISTRY_USER}}/appointment-service:latest
 
       - name: License finder
         run: |
