@@ -26,23 +26,23 @@ jobs:
 
       - name: GitLeaks Scan
         run: |
-          cd hospital-management/directory-service
+          cd hospital-management/directory-service-hospital
           docker pull prathameshkulkarni47/gitleaks
           docker run -v "$(pwd):/scan" prathameshkulkarni47/gitleaks
 
 
       - name: OSS scan
         run: |
-          cd hospital-management/directory-service
+          cd hospital-management/directory-service-hospital
           mvn ossindex:audit
 
       - name: OWASP Scan
         if: false
         run: |
-          cd hospital-management/directory-service
+          cd hospital-management/directory-service-hospital
           mvn org.owasp:dependency-check-maven:check
 
-      - name: Build Docker Image for directory-service
+      - name: Build Docker Image for directory-service-hospital
         run: 
           docker build -t ${{ secrets.DOCKER_REGISTRY_USER}}/directory-service:latest -f dockerfile .
         working-directory: hospital-management/directory-service-hospital
@@ -53,13 +53,13 @@ jobs:
           username: ${{ secrets.DOCKER_REGISTRY_USER }}
           password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
 
-      - name: Push Docker Image for directory-service
+      - name: Push Docker Image for directory-service-hospital
         run: 
-          docker push ${{secrets.DOCKER_REGISTRY_USER}}/directory-service:latest
+          docker push ${{secrets.DOCKER_REGISTRY_USER}}/directory-service-hospital:latest
 
       - name: License finder
         run: |
-          cd hospital-management/directory-service
+          cd hospital-management/directory-service-hospital
           docker pull prathameshkulkarni47/license-finder
           docker run -v "$(pwd):/scan" prathameshkulkarni47/license-finder
         continue-on-error: true
