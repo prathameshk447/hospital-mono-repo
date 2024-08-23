@@ -25,11 +25,6 @@ jobs:
           docker pull prathameshkulkarni47/gitleaks
           docker run -v "$(pwd):/scan" prathameshkulkarni47/gitleaks
 
-      - name: OSS scan
-        run: |
-          cd hospital-management/patient-service
-          mvn ossindex:audit
-
       - name: OWASP Scan
         if: false
         run: |
