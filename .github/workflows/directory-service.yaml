@@ -21,7 +21,7 @@ jobs:
 
       - name: Perform Google formatter check
         run: |
-          cd hospital-management/directory-service
+          cd hospital-management/directory-service-hospital
           mvn com.spotify.fmt:fmt-maven-plugin:check
 
       - name: GitLeaks Scan
