@@ -48,9 +48,9 @@ jobs:
           username: ${{ secrets.DOCKER_REGISTRY_USER }}
           password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
 
-      - name: Push Docker Image for directory-service-hospital
+      - name: Push Docker Image for directory-service
         run: 
-          docker push ${{secrets.DOCKER_REGISTRY_USER}}/directory-service-hospital:latest
+          docker push ${{secrets.DOCKER_REGISTRY_USER}}/directory-service:latest
 
       - name: License finder
         run: |
